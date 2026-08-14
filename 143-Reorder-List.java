@@ -37,18 +37,22 @@ class Solution {
             return;
         }
         ListNode mid = mid(head);
-        ListNode hs = reverse(mid);
+        ListNode secondhalf = mid.next;
+        mid.next = null;
+
+        ListNode hs = reverse(secondhalf);
         ListNode hf = head;
+
          while(hf!=null &&  hs!=null){
             ListNode temp1 = hf.next;
+            ListNode temp2 = hs.next;
+
             hf.next = hs;
+            hs.next = temp1;
+
             hf = temp1;
-            temp1 = hs.next;
-            hs.next = hf;
-            hs = temp1;
-         }
-         if(hf!=null){
-            hf.next = null;
-         }
+            hs = temp2;
+            hf = temp1;
     }
+}
 }
