@@ -11,30 +11,24 @@ private Stack<Integer> second;
     }
     
     public int pop() {
+        if(second.empty()){
         while(!first.empty()){
             second.push(first.pop());
         }
-        int removed = second.pop();
-
-        while(!second.empty()){
-            first.push(second.pop());
         }
-        return removed;
+        return second.pop();
     }
     public int peek() {
+        if(second.empty()){
         while(!first.empty()){
             second.push(first.pop());
         }
-        int peeked = second.peek();
-
-        while(!second.empty()){
-            first.push(second.pop());
         }
-        return peeked;
+        return second.peek();
     }
     
     public boolean empty() {
-        return first.isEmpty();
+        return first.isEmpty() && second.isEmpty();
     }
 }
 
