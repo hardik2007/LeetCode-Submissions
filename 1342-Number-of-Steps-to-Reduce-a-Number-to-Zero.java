@@ -1,12 +1,15 @@
 class Solution {
-    public int numberOfSteps(int num) {
-        if (num == 0){
-            return 0;
+    public int helper(int num, int count){
+         if (num == 0){
+            return count;
         }
         if(num%2!=0){
-            return 1 + numberOfSteps(num-1);
+            return helper(num-1,count+1);
         }else{
-            return 1 + numberOfSteps(num/2);
+            return helper(num/2, count+1);
         }
+    }
+    public int numberOfSteps(int num) {
+        return helper(num,0);
     }
 }
