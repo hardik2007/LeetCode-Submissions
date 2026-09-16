@@ -14,24 +14,23 @@
  * }
  */
 class Solution {
-    public void preOrder(Queue<TreeNode> q, TreeNode root){
-        if(root == null){
-            return;
-        }
-        q.add(root);
-        preOrder(q,root.left);
-        preOrder(q,root.right);
-    }
     public void flatten(TreeNode root) {
         if(root == null) return;
-        Queue<TreeNode> q = new LinkedList<>();
-        preOrder(q,root);
-        TreeNode current = q.poll();
-        while(!q.isEmpty()){
-            TreeNode next = q.poll();
-            current.left = null;
-            current.right = next;
-            current = next;
+
+        TreeNode current = root;
+        while(current!=null){
+            if(current.left!=null){
+                TreeNode temp = current.left;
+
+                while(temp.right!=null){
+                    temp = temp.right;
+                }
+
+                temp.right = current.right;
+                current.right = current.left;
+                current.left = null;
+            }
+            current = current.right;
         }
     }
 }
