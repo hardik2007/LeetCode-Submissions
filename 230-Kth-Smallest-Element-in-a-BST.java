@@ -15,19 +15,24 @@
  */
 import java.util.Vector;
 class Solution {
-    public void inOrder(TreeNode node, Vector<Integer> ans){
-        if(node == null) return;
+    int count = 0;
+    public TreeNode helper(TreeNode root, int k){
+        if(root == null) return null;
+        
+        TreeNode left = helper(root.left,k);
+        if(left!=null){
+            return left;
+        }
+        count++;
+        if(count == k){
+            return root;
+        }
 
-        inOrder(node.left,ans);
-        ans.add(node.val);
-        inOrder(node.right,ans);
+        return helper(root.right,k);
     }
+    
     public int kthSmallest(TreeNode root, int k) {
         if(root == null) return 0;
-        Vector<Integer> ans = new Vector<>();
-
-        inOrder(root,ans);
-        
-        return ans.get(k-1);
-    }
+        return helper(root,k).val;
+}
 }
