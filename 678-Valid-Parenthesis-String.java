@@ -1,0 +1,27 @@
+class Solution {
+    public boolean checkValidString(String s) {
+        int leftMax = 0;
+        int leftMin = 0;
+
+        for(int i=0;i<s.length();i++){
+            char bracket = s.charAt(i);
+
+            if(bracket == '('){
+                leftMax++;
+                leftMin++;
+            }
+            else if(bracket == ')'){
+                leftMax--;
+                leftMin--;
+            }
+            else{
+                leftMax++;
+                leftMin--;
+            }
+            if(leftMax < 0) return false;
+            if(leftMin < 0) leftMin = 0;
+        }
+
+        return leftMin == 0;
+    }
+}
